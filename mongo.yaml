@@ -20,7 +20,16 @@ spec:
           ports:
           - containerPort: 27017
           env: 
-          - name: MONGO_INITDB_ROOT_USERNAME
-            value: # From K8s secrets - Must be created BEFORE deployment!!!
+          - name: MONGO_INITDB_ROOT_USERNAME # required name for the container
+            valueFrom:
+              secretKeyRef:  
+                name: mongodb-secret # from secret metadata
+                key: mongo-root-username 
           - name: MONGO_INITDB_ROOT_PASSWORD
-            value: # From K8s secrets
+            valueFrom:
+              secretKeyRef:  
+                name: mongodb-secret # from secret metadata
+                key: mongo-root-password
+
+# Deploy mongodb pod by
+# kubectl apply -f mongo.yaml
