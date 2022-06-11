@@ -3,8 +3,7 @@ kind: Deployment
 metadata:
   name: mongodb-deployment
   labels:
-    app: mongodb # Unclear if the service uses selector from deployment OR pod?
-    # Are they equivalent/similar?
+    app: mongodb
 spec:
   replicas: 1
   selector:
@@ -13,13 +12,13 @@ spec:
   template:
     metadata:
       labels:
-        app: mongodb # REFERENCE FROM
+        app: mongodb
     spec:
       containers:
         - name: mongodb
           image: mongo
           ports:
-          - containerPort: 27017 # MATCH 1
+          - containerPort: 27017
           env: 
           - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
@@ -31,53 +30,15 @@ spec:
               secretKeyRef:  
                 name: mongodb-secret
                 key: mongo-root-password
-# Deployment and service belong together. Add them to the same yaml file
---- # Syntax for document separation
+---
 apiVersion: v1
 kind: Service
 metadata:
   name: mongodb-service
 spec: 
   selector:
-    app: mongodb # REFERENCING TO
+    app: mongodb
   ports:
     - protocol: TCP
-      port: 27017 # The port of the service. Can be a different port
-      targetPort: 27017 # the port of the container # MATCH 2
-
-# kubectl apply -f mongo.yaml
-# logs:
-# deployment.apps/mongodb-deployment unchanged ### Was already deployed!
-# service/mongodb-service created
-
-# kubectl get service 
-# logs:
-# NAME              TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)     AGE
-# kubernetes        ClusterIP   10.96.0.1      <none>        443/TCP     5d12h
-# mongodb-service   ClusterIP   10.106.68.93   <none>        27017/TCP   42s
-
-# Validate Service attached to the correct pod
-# kubectl describe service mongodb-service
-# logs:
-# Name:              mongodb-service
-# Namespace:         default
-# Labels:            <none>
-# Annotations:       <none>
-# Selector:          app=mongodb
-# Type:              ClusterIP
-# IP Family Policy:  SingleStack
-# IP Families:       IPv4
-# IP:                10.106.68.93
-# IPs:               10.106.68.93
-# Port:              <unset>  27017/TCP
-# TargetPort:        27017/TCP
-# Endpoints:         172.17.0.3:27017 ### Check that this is the right pod (SEE BELOW)
-# Session Affinity:  None
-# Events:            <none>
-
-
-# Check that the pod is running on the correct IP:
-# kubectl get pod -o wide         ### LOG WITH EXTRA INFO
-# logs:
-# NAME                                  READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
-# mongodb-deployment-7bb6c6c4c7-n5jzh   1/1     Running   0          20m   172.17.0.3   minikube   <none>           <none>
+      port: 27017
+      targetPort: 27017
