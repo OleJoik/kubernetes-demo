@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  labels:
+    app: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo # https://hub.docker.com/_/mongo for configuration and usage
+          ports:
+          - containerPort: 27017
+          env: 
+          - name: MONGO_INITDB_ROOT_USERNAME
+            value: # From K8s secrets - Must be created BEFORE deployment!!!
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            value: # From K8s secrets
