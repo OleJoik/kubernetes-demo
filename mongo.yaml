@@ -16,20 +16,17 @@ spec:
     spec:
       containers:
         - name: mongodb
-          image: mongo # https://hub.docker.com/_/mongo for configuration and usage
+          image: mongo
           ports:
           - containerPort: 27017
           env: 
-          - name: MONGO_INITDB_ROOT_USERNAME # required name for the container
+          - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
               secretKeyRef:  
-                name: mongodb-secret # from secret metadata
+                name: mongodb-secret
                 key: mongo-root-username 
           - name: MONGO_INITDB_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:  
-                name: mongodb-secret # from secret metadata
+                name: mongodb-secret
                 key: mongo-root-password
-
-# Deploy mongodb pod by
-# kubectl apply -f mongo.yaml
