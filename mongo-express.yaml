@@ -32,7 +32,7 @@ spec:
               key: mongo-root-password
         - name: ME_CONFIG_MONGODB_SERVER
           valueFrom:
-            secretKeyRef:   # configMap instead of secret + "keyRef"
+            configMapKeyRef:
               name: mongodb-configmap
               key: database_url
 
