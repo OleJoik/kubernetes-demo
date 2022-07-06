@@ -4,3 +4,7 @@ metadata:
   name: mongodb-configmap
 data:
   database_url: mongodb-service
+
+# creating configmap
+# kubectl apply -f mongo-configmap.yaml
+# MUST BE CREATED BEFORE THE SERVICE REFERENCING IT
