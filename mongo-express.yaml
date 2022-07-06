@@ -32,3 +32,5 @@ spec:
                   key: mongo-root-password
         - name: ME_CONFIG_MONGODB_SERVER
           value: # WILL COME FROM CONFIGMAP. MUST BE CREATED 
+          
+          # THE CONFIGMAP MUST BE CREATED BEFORE THE DEPLOYMENT!
