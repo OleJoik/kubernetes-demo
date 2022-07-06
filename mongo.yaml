@@ -34,7 +34,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodb-service # FROM HERE
+  name: mongodb-service
 spec: 
   selector:
     app: mongodb
