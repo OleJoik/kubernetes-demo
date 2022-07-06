@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-express
+  labels:
+    app: mongo-express
+spec:
+  replicas: 1
+  selector:   
+    matchLabels:
+      app: mongo-express
+  template:
+    metadata:
+      labels:
+        app: mongo-express
+    spec:
+      containers:
+      - name: mongo-express # image name, https://hub.docker.com/_/mongo-express. Web page says it starts at port 8081, and needs a fair set of environmental variables.
+        image: mongo-express
+        ports:
+        - containerPort: 8081
+        env: # Docs: From dockerhub
+        - name: ME_CONFIG_MONGODB_ADMINUSERNAME 
+          valueFrom: # copied from mongo.yaml
+              secretKeyRef:  
+                name: mongodb-secret
+                key: mongo-root-username 
+        - name: ME_CONFIG_MONGODB_ADMINPASSWORD 
+          valueFrom:
+                secretKeyRef:  
+                  name: mongodb-secret
+                  key: mongo-root-password
+        - name: ME_CONFIG_MONGODB_SERVER
+          value: # WILL COME FROM CONFIGMAP. MUST BE CREATED 
