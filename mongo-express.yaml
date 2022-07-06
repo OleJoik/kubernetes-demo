@@ -36,7 +36,7 @@ spec:
               name: mongodb-configmap
               key: database_url
 
---- ## CREATING THE EXTERNAL SERVICE FOR MONGO-EXPRESS
+--- 
 apiVersion: v1
 kind: Service
 metadata:
@@ -44,36 +44,9 @@ metadata:
 spec:
   selector:
     app: mongo-express
-  # TO MAKE IT AN EXTERNAL SERVICE, ADD type:
-  type: LoadBalancer # the type of an external service, although internal services also act as load balancers. 
-  # Accepts external requests by assigning an external IP adress.
+  type: LoadBalancer 
   ports:
     - protocol: TCP
       port: 8081
       targetPort: 8081
-      #ALSO, ADD A THIRD PORT
       nodePort: 30000
-      # The actual port that will go in the browser to access the service
-      # MUST BE BETWEEN 30000-32767
-
-# kubectl apply -f mongo-express.yaml
-# logs
-# deployment.apps/mongo-express unchanged
-# service/mongo-express-service created
-
-# kubectl get service
-# NAME                    TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-# kubernetes              ClusterIP      10.96.0.1      <none>        443/TCP          30d
-# mongo-express-service   LoadBalancer   10.97.91.15    <pending>     8081:30000/TCP   33s
-# mongodb-service         ClusterIP      10.106.68.93   <none>        27017/TCP        25d
-
-# NOTICE THE TYPES! ClusterIP (INTERNAL SERVICE) is default. Gets INTERNAL IP-ADRESS
-# When type: LoadBalancer is specified in config, it's external. GET BOTH EXTERNAL AND INTERNAL IP ADDRESS. (pending in kubectl)
-
-# In minikube, you have to assign the external IP adress
-# minikube service mongo-express-service - and it locks up the terminal like localhost....
-# logs:
-# λ minikube service mongo-express-service
-# * Starting tunnel for service mongo-express-service.
-# * Opening service default/mongo-express-service in default browser...
-# ! Because you are using a Docker driver on windows, the terminal needs to be open to run it.
