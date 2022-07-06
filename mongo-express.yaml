@@ -35,20 +35,3 @@ spec:
             configMapKeyRef:
               name: mongodb-configmap
               key: database_url
-
-# creating the deployment
-# kubectl apply -f mongo-express.yaml
-# output: deployment.apps/mongo-express created
-
-# See the pod:
-# kubectl get pod
-# NAME                                  READY   STATUS    RESTARTS      AGE
-# mongo-express-68c4748bd6-scgpt        1/1     Running   0             37s
-# mongodb-deployment-7bb6c6c4c7-n5jzh   1/1     Running   1 (24d ago)   25d
-
-# See logs:
-# kubectl logs mongo-express-68c4748bd6-scgpt
-# (node:7) [MONGODB DRIVER] Warning: Current Server Discovery and Monitoring engine is deprecated, and will be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
-# Mongo Express server listening at http://0.0.0.0:8081
-# Server is open to allow connections from anyone (0.0.0.0)
-# basicAuth credentials are "admin:pass", it is recommended you change this in your config.js!
