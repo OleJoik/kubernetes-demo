@@ -1,0 +1,22 @@
+
+### COMPONENT IN NAMESPACE
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+  namespace: my-namespace  ## Adding the namespace
+data:
+  db_url: mysql-service.database
+
+# ALTERNATIVE
+# Namespace can also be set from kubectl
+# kubectl apply -f mysql-configmap.yaml --namespace=my-namespace
+
+# Getting a component in a namespace: Must use the -n flag
+# Example:
+# kubectl get configmap -n my-namespace
+
+# Any get-command is using the "default" namespace ... by default
+
+# Change active namespace with __kubens__ cli tool. Must be installed! (install kubectx)
