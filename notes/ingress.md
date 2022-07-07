@@ -6,7 +6,7 @@
 - When do you need Ingress?
 - Ingress YAML Configuration
 - Ingress Controller 
-
+- TLS-certificates / SSL 
 
 ## What is ingress
 
@@ -66,3 +66,11 @@ To see the pod running in minikube, do...
 kubectl get pod -n kube-system
 ```
 
+## TLS-certificates/SSL
+- Add `tls` to ingress spec
+- Reference a tls-certificate from secret component
+### The SSL secret
+- Uses the special `tls` type
+- Needs to have the keys `tls.crt` and `tls.key`
+- Values are file content NOT paths/locations
+- Secret must be in the same namespace as the ingress component

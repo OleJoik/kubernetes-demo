@@ -3,6 +3,10 @@ kind: Ingress
 metadata:
   name: tls-example-ingress
 spec:
+  tls: # Add this part for SSL
+  - hosts:
+    - myapp.com
+    secretName: myapp-secret-tls # TLS secret reference
   rules:
     - host: myapp.com
       http: 
