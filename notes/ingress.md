@@ -54,7 +54,7 @@ http://myapp.com/PATHS-STUFF
 - No server in K8s cluster is accessible from outside!
 
 
-### Minicube setup
+## Minicube setup
 This command starts the K8s Nginx implementation of ingress controller...
 ```
 minikube addons enable ingress
