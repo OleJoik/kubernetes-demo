@@ -31,6 +31,8 @@ http://myapp.com/PATHS-STUFF
 - Must be a valid domain adress
 - Map domain name to the Node's IP adress, which is the entrypoint
 - Might also map the hostname to a server outside of the kubernetes cluster (API GATEWAY?)
+- Can use one host (with several paths/backends)
+- Or multiple hosts (subdomains!)
 
 ## Ingress controller
 - also called "ingress implementation"/"Ingress Controller Pod"
