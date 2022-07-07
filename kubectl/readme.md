@@ -1,5 +1,9 @@
 # kubectl commands
 
+`kubectl config get-contexts`
+
+`kubectl config use-context CONTEXT_NAME`
+
 `kubectl version -h` ( = help)
 
 `kubectl get nodes`
