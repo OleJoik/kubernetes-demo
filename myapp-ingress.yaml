@@ -1,0 +1,13 @@
+apiVersion: networking.kys.io/v1beta1
+kind: Ingress # Defines the component type
+metadata:
+  name: myapp-ingress
+spec:
+  rules:
+  - host: myapp.com # Mapping the domain to the internal service
+    http: # Only http (not https!) for now. Later chapter!
+    # the http refers to what happens AFTER the request has been made, when the request is forwarded to the internal service.
+      paths: # Whatever comes AFTER the domain
+      - backend:
+        serviceName: myapp-internal-service # The name of the internal service
+        servicePort: 8080 # The port of the internal service (note-not targetPort!)

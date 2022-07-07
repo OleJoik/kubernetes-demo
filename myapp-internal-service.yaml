@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-internal-service
+spec:
+  selector:
+    app: myapp
+  ports:
+    - protocol: TCP
+      port: 8080 # The servicePort of the ingress. targetPort points to the port of the pod.
+      targetPort: 8080
+
+      # Notice: No nodePort!
